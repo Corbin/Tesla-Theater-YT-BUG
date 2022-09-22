@@ -1,0 +1,107 @@
+input[type=text], select {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+body {
+  width: 85%;
+  margin: 30px auto;
+  font-family: sans-serif;
+  background: black;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.0em;
+  margin: 0 0 30px;
+  font-family: sans-serif;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 0 30px;
+  font-family: sans-serif;
+  color: white;
+}
+
+
+div {
+  align-content: space-around;
+}
+
+a {
+  display: inline-block;
+  margin-bottom: 8px;
+  width: calc(50% - 4px);
+  margin-right: 8px;
+  text-decoration: none;
+  color: black;
+}
+
+a:nth-of-type(2n) {
+  margin-right: 0;
+}
+
+@media screen and (min-width: 50em) {
+  a {
+    width: calc(25% - 6px);
+  }
+
+  a:nth-of-type(2n) {
+    margin-right: 8px;
+  }
+
+  a:nth-of-type(4n) {
+    margin-right: 0;
+  }
+}
+
+figure {
+  margin: 0;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+  transition: transform .2s ease-in-out;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topnav a.icon {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+li:not(label) {
+  cursor:pointer;
+}
+
+.Add.Item {
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
+    /* background-attachment: fixed; */
+    background-size: contain;
+}
