@@ -8,15 +8,16 @@ function AddModal ({func, update}) {
   const style = {
     position: 'fixed',
     backgroundColor: 'rgb(231, 231, 231)',
-    left: '38%',
-    top: '25%',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
     width: '385px',
-    height: '351px',
+    height: '385px',
     inlineSize: 'max-content',
     display: 'flex',
     flexDirection: 'column',
     placeContent: 'center',
-    alignItems: 'center'
+alignItems: 'center'
   };
   const inputStyle = {
     width: '350px',
