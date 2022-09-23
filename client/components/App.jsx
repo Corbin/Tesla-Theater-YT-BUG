@@ -51,9 +51,8 @@ function App () {
         justifyContent: 'space-around'
       }
     }>
-      <li style={{display: 'flex', flexDirection: 'd'}}>
-        <p>Fullscreen?</p>
-        <input type="checkbox" id="fullScreen" name="fullScreen" value="FullScreen" onChange={(e) => setFullscreen(e.target.checked)}/>
+      <li>
+        <input type="checkbox" id="fullScreen" name="fullScreen" value="FullScreen" onChange={(e) => setFullscreen(e.target.checked)}/> <label for="fullScreen">{'Fullscreen (Youtube Bug)'}</label>
       </li>
       <li onClick={() => setViewType('Home')}>Home</li>
       <li onClick={()=> setViewType('Gaming')}>Gaming</li>

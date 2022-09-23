@@ -72,6 +72,7 @@ img {
   border: none;
   max-width: 100%;
   height: auto;
+  width: 20vw;
   display: block;
   background: #000;
   transition: transform .2s ease-in-out;
