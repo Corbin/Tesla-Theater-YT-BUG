@@ -11,8 +11,6 @@ function App () {
     axios.get('/Sites')
     .then(({data}) => setData(data))
   }, [fullScreenTrue, Update]);
-
-  console.log(fullScreenTrue)
   const [modalVisible, setModalVisible] = useState(false);
   const ItemStyle = {
     display: 'flex',
@@ -34,6 +32,7 @@ function App () {
   const ImgStyle = {
     maxWidth: '300px',
     maxHeight: '160px'
+
   }
   return (
     <>
@@ -52,7 +51,7 @@ function App () {
       }
     }>
       <li>
-        <input type="checkbox" id="fullScreen" name="fullScreen" value="FullScreen" onChange={(e) => setFullscreen(e.target.checked)}/> <label for="fullScreen">{'Fullscreen (Youtube Bug)'}</label>
+        <input type="checkbox" id="fullScreen" name="fullScreen" value="FullScreen" onChange={(e) => setFullscreen(e.target.checked)}/> <label htmlFor="fullScreen">{'Fullscreen (Youtube Bug)'}</label>
       </li>
       <li onClick={() => setViewType('Home')}>Home</li>
       <li onClick={()=> setViewType('Gaming')}>Gaming</li>
@@ -92,7 +91,7 @@ function App () {
           goodToGo = true;
         }
       if(goodToGo){
-        return <a href={fullScreenTrue ? "https://www.youtube.com/redirect?q=" + data.url : data.url} id={data.name}>
+        return <a key={data.name} href={fullScreenTrue ? "https://www.youtube.com/redirect?q=" + data.url : data.url} id={data.name}>
       <figure>
         <img style={ImgStyle} src={data.imageurl}></img>
       </figure>
