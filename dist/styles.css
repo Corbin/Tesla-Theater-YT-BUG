@@ -9,8 +9,8 @@ input[type=text], select {
 }
 
 body {
-  width: 85%;
-  margin: 30px auto;
+  width: 100%;
+  margin: 0px auto;
   font-family: sans-serif;
   background: black;
 }
@@ -98,6 +98,9 @@ fieldset {
 
 li:not(label) {
   cursor:pointer;
+}
+li {
+  font-size: 1em;
 }
 
 .Add.Item {

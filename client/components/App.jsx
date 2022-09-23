@@ -40,12 +40,14 @@ function App () {
     <ul className="navigation" style={
       {
         listStyleType: 'none',
-        padding: '0px',
+        padding: '13px',
         overflow: 'hidden',
         backgroundColor: 'rgb(51, 51, 51)',
         display: 'flex',
+        margin: '0px',
         flexDirection: 'row',
         color: 'white',
+        width: 'auto',
         alignItems: 'center',
         justifyContent: 'space-around'
       }
