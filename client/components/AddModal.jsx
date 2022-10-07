@@ -8,9 +8,6 @@ function AddModal ({func, update}) {
   const [category, setCategory] = useState('Streaming');
   const [images, setImages] = useState({});
   const [imageSearchEnabled, setSearchActive] = useState(true);
-  const imageSearch = new SerpApi.GoogleSearch(process.env.API_KEY);
-
-
 
   const style = {
     position: 'fixed',
@@ -37,11 +34,6 @@ function AddModal ({func, update}) {
     margin: '0px 5px'
   }
 
-  const inputPanelStyle = {
-    //marginLeft: '10px',
-    //width: '100%'
-  }
-
   const panelBtnStyle = {
     padding: '10px',
     marginRight: '10px',
@@ -64,17 +56,6 @@ function AddModal ({func, update}) {
   }
 
   const executeImgSearch = (query) => {
-
-    const params = {
-      engine: "google",
-      ijn: "0",
-      q: query,
-      google_domain: "google.com",
-      tbm: "isch",
-      device: "desktop"
-    };
-
-
     //CORS Bypass
     const config = {
       headers: {
@@ -90,10 +71,7 @@ function AddModal ({func, update}) {
       }
 
     }
-    imageSearch.json(params)
-    .then(data => console.log('DATA:', data))
-    .catch(error => console.log('ERROR: ', error));
-    axios.get('http://localhost:3005', config)
+    axios.get('http://localhost:3000', config)
     .then(({data}) => setImages(data))
     .catch(error => console.log(error));
 
@@ -109,7 +87,7 @@ function AddModal ({func, update}) {
       {imageSearchEnabled ?
         <>
         <div className="search-panel">
-            <input name="ImageURL" id="ImageURL" required="" type="text" placeholder="Enter image query, e.g. Hulu Logo" onChange={(e) => setImageURL(e.target.value)} style={inputPanelStyle}/>
+            <input name="ImageURL" id="ImageURL" required="" type="text" placeholder="Enter image query, e.g. Hulu Logo" onChange={(e) => setImageURL(e.target.value)}/>
             <button style={panelBtnStyle} onClick={() => executeImgSearch(imageurl)}>Search</button>
         </div>
         <div className="search-results">
