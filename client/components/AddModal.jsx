@@ -71,7 +71,7 @@ function AddModal ({func, update}) {
       }
 
     }
-    axios.get('http://localhost:3000', config)
+    axios.get(process.env.CORS_PROXY_ADDR, config)
     .then(({data}) => setImages(data))
     .catch(error => console.log(error));
 
