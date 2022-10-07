@@ -8,8 +8,7 @@ function AddModal ({func, update}) {
   const [category, setCategory] = useState('Streaming');
   const [images, setImages] = useState({});
   const [imageSearchEnabled, setSearchActive] = useState(true);
-  const imageSearch = new SerpApi.GoogleSearch
-(process.env.API_KEY);
+  const imageSearch = new SerpApi.GoogleSearch(process.env.API_KEY);
 
 
 
@@ -66,14 +65,14 @@ function AddModal ({func, update}) {
 
   const executeImgSearch = (query) => {
 
-    // const params = {
-    //   engine: "google",
-    //   ijn: "0",
-    //   q: "query",
-    //   google_domain: "google.com",
-    //   tbm: "isch",
-    //   device: "desktop"
-    // };
+    const params = {
+      engine: "google",
+      ijn: "0",
+      q: query,
+      google_domain: "google.com",
+      tbm: "isch",
+      device: "desktop"
+    };
 
 
     //CORS Bypass
@@ -91,9 +90,9 @@ function AddModal ({func, update}) {
       }
 
     }
-    // imageSearch.json(params)
-    // .then(data => console.log(data))
-    // .catch(error => console.log('ERROR: ', error));
+    imageSearch.json(params)
+    .then(data => console.log('DATA:', data))
+    .catch(error => console.log('ERROR: ', error));
     axios.get('http://localhost:3005', config)
     .then(({data}) => setImages(data))
     .catch(error => console.log(error));
