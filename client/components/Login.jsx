@@ -24,7 +24,6 @@ function Login() {
   }, []);
 
   const handleClicks = (submitter) => {
-    console.log('username:', username, 'password:', password)
     submitter.name === 'login' ?
       axios.get('/Users', {params: {username, password}})
       .then(({data}) => data.loginSuccessful ? (setSuccessStatus(true), setUserID(data.id), setLoginMessage('Login Successful!'), localStorage.setItem('teslaTheaterUser', JSON.stringify({username, token:password, lastLogin: Date.now()}))) : (setSuccessStatus(false), setLoginMessage('Incorrect username/password combination.')))
