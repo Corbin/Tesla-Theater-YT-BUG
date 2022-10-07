@@ -16,14 +16,12 @@ app.use(express.static("dist"));
 
 
 app.get('/Sites/:user_id', (req, res) => {
-  console.log('pulled', req)
   db.getData(req.params.user_id)
   .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0].results)))
   .catch(error => (console.log(error), res.status(500).json(error)));
 })
 
 app.post('/Sites', (req, res) => {
-  console.log(req.body);
   db.AddOrUpdateSite(req.body)
   .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0])))
   .catch(error => (console.log(error), res.status(500).json(error)));
@@ -31,17 +29,20 @@ app.post('/Sites', (req, res) => {
 })
 
 app.get('/Users', (req, res) => {
-  console.log('Login Attempt', req.query)
+  //console.log('Login Attempt', req.query)
   db.attemptLogin(req.query)
   .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0].results)))
   .catch(error => (console.log(error), res.status(500).json(error)));
 })
 
 app.post('/Users', (req, res) => {
-  console.log('Registration Attempt')
   db.attemptRegistration(req.body)
-  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0].results)))
-  .catch(error => (console.log(error), res.status(500).json(error)));
+  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json({
+    registrationSuccessful: true,
+    id:rows[0]['id'],
+    username:rows[0]['username']
+  })))
+  .catch(error => (console.log(error), res.status(500).json(error.detail.includes('already exists') ? {registrationSuccessful: false, err: "Username already exists"} : {registrationSuccessful: false, err: error})));
 })
 
 app.listen(port, () => {
