@@ -56,6 +56,7 @@ function AddModal ({func, update}) {
   }
 
   const executeImgSearch = (query) => {
+    console.log(process.env.CORS_PROXY_ADDR)
     //CORS Bypass
     const config = {
       headers: {
@@ -73,7 +74,7 @@ function AddModal ({func, update}) {
     }
     axios.get(process.env.CORS_PROXY_ADDR, config)
     .then(({data}) => setImages(data))
-    .catch(error => console.log(error));
+    .catch(error => console.log('error', error));
 
   }
 
