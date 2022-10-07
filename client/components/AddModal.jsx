@@ -1,23 +1,32 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import SerpApi from 'google-search-results-nodejs';
 function AddModal ({func, update}) {
   const [name, setName] = useState('');
   const [url, setURL] = useState('');
   const [imageurl, setImageURL] = useState('');
   const [category, setCategory] = useState('Streaming');
+  const [images, setImages] = useState({});
+  const [imageSearchEnabled, setSearchActive] = useState(true);
+  const imageSearch = new SerpApi.GoogleSearch
+(process.env.API_KEY);
+
+
+
   const style = {
     position: 'fixed',
     backgroundColor: 'rgb(231, 231, 231)',
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '385px',
-    height: '385px',
+    maxWidth: '385px',
+    minHeight: '385px',
+    maxHeight: '512px',
     inlineSize: 'max-content',
     display: 'flex',
     flexDirection: 'column',
     placeContent: 'center',
-alignItems: 'center'
+    alignItems: 'center'
   };
   const inputStyle = {
     width: '350px',
@@ -29,19 +38,98 @@ alignItems: 'center'
     margin: '0px 5px'
   }
 
+  const inputPanelStyle = {
+    //marginLeft: '10px',
+    //width: '100%'
+  }
+
+  const panelBtnStyle = {
+    padding: '10px',
+    marginRight: '10px',
+    marginLeft: '10px'
+  }
+
+  const urlCheck = (input) => {
+    let url = input;
+    if (!url.includes('http://')) {
+      url = 'http://' + input;
+      if (!url.includes('www.')) {
+        url = 'http://www.' + input;
+      }
+    } else {
+      if (!url.includes('www.')) {
+        url = 'http://www.' + input.split('http://')[1];
+      }
+    }
+    setImageURL(url);
+  }
+
+  const executeImgSearch = (query) => {
+
+    // const params = {
+    //   engine: "google",
+    //   ijn: "0",
+    //   q: "query",
+    //   google_domain: "google.com",
+    //   tbm: "isch",
+    //   device: "desktop"
+    // };
+
+
+    //CORS Bypass
+    const config = {
+      headers: {
+        Authorization: process.env.AUTHORIZATION,
+        'Target-URL': 'https://serpapi.com/search',
+      },
+      params: {
+        q: query,
+        tbm: 'isch',
+        ijn: 0,
+        num: 100,
+        api_key: process.env.API_KEY
+      }
+
+    }
+    // imageSearch.json(params)
+    // .then(data => console.log(data))
+    // .catch(error => console.log('ERROR: ', error));
+    axios.get('http://localhost:3005', config)
+    .then(({data}) => setImages(data))
+    .catch(error => console.log(error));
+
+  }
+
   return (
       <div className="Modal" style={style}>
       <label>Name</label>
-      <input name="Name" id="Name" required type="text" onChange={(e) => setName(e.target.value)} style={inputStyle}/>
+      <input name="Name" id="Name" placeholder="Enter the name of the service" required type="text" onChange={(e) => setName(e.target.value)} style={inputStyle}/>
       <label>URL</label>
-      <input name="URL" id="URL" required type="text" onChange={(e) => setURL(e.target.value)} style={inputStyle}/>
-      <label>ImageURL</label>
-      <input name="ImageURL" id="ImageURL" required type="text" style={inputStyle} onChange={(e) => setImageURL(e.target.value)}/>
-  {/* <select name="Category" id="Category" required style={{textAlign: 'center', ...inputStyle}} onChange={(e) => setCategory(e.target.value)}>
-      <option value="Gaming">Gaming</option>
-      <option value="Streaming">Streaming</option>
-      <option value="Browsing">Browsing</option>
-</select> */}
+      <input name="URL" id="URL" placeholder="E.g. www.hulu.com, http://hulu.com, hulu.com" required type="text" onChange={(e) => setURL(e.target.value)} style={inputStyle}/>
+      <label>{imageSearchEnabled ? 'Thumbnail Search Query' : 'ImageURL'}</label>
+      {imageSearchEnabled ?
+        <>
+        <div className="search-panel">
+            <input name="ImageURL" id="ImageURL" required="" type="text" placeholder="Enter image query, e.g. Hulu Logo" onChange={(e) => setImageURL(e.target.value)} style={inputPanelStyle}/>
+            <button style={panelBtnStyle} onClick={() => executeImgSearch(imageurl)}>Search</button>
+        </div>
+        <div className="search-results">
+            { Object.keys(images).length > 0 && images.images_results.map(image => <img className="search-result-image" onClick={(e) => {
+                setImageURL(image.original);
+                [...document.getElementsByClassName('search-result-image checked')].forEach(checkedImage => checkedImage.className = 'search-result-image');
+                e.target.className += " checked";
+                }}key={image.position} src={image.original}/>)}
+          </div>
+        </>
+      : <input name="ImageURL" id="ImageURL" placeholder="Enter image's url, e.g. https://i.imgur.com/image.png" required type="text" style={inputStyle} onChange={(e) => urlCheck(e.target.value)}/>
+      }
+<p style={{
+    fontSize: '13px',
+    color: '#056cf7',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+}}
+ onClick={() => setSearchActive(!imageSearchEnabled)}>{imageSearchEnabled ? 'Manually Enter Image URL' : 'Search for an image instead'}</p>
 <fieldset onChange={(e) => setCategory(e.target.value)}>
     <legend>Select a Category:</legend>
       <input type="radio" id="Streaming" name="Category" value="Streaming" defaultChecked/>
@@ -61,3 +149,4 @@ alignItems: 'center'
 }
 
 export default AddModal;
+

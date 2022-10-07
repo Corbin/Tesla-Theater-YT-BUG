@@ -1,4 +1,4 @@
-input[type=text], select {
+input[type=text] {
   width: 70%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -36,8 +36,15 @@ div {
 }
 
 a {
-  display: inline-block;
+  /* display: inline-block;
   margin-bottom: 8px;
+  width: calc(50% - 4px);
+  margin-right: 8px;
+  text-decoration: none;
+  color: black; */
+
+  display: inline-block;
+  /* margin-bottom: 8px; */
   width: calc(50% - 4px);
   margin-right: 8px;
   text-decoration: none;
@@ -103,12 +110,142 @@ li {
   font-size: 1em;
 }
 
-.Add.Item {
-    margin: auto;
+.Add.Item img{
+    /* margin: auto;
     cursor: pointer;
     height: 6vw;
     width: 6vw;
     background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
-    /* background-attachment: fixed; */
-    background-size: contain;
+    background-size: contain; */
+
+    /* margin: auto;
+    cursor: pointer;
+    min-height: 4vw;
+    min-width: 4vw;
+    max-width: 6em;
+    max-height: 6em;
+    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
+    background-size: cover; */
+
+    /* margin: 1vh auto;
+    cursor: pointer;
+    min-height: 3vw;
+    min-width: 3vw;
+    max-width: 6em;
+    max-height: 6em;
+    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
+    background-size: cover; */
+
+    width: auto;
+    height: 3.5vh;
+    /* max-width: 64px; */
+    /* max-width: 260px; */
+    cursor: pointer;
+    /* max-height: 160px; */
+}
+
+.Login {
+  position: fixed;
+  background-color: rgb(231, 231, 231);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20em;
+  height: 13em;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.Login input {
+  width: 75%;
+  padding: 5px 15px;
+  margin: 8px 0px;
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.Login label {
+  font-size: 12px !important;
+  align-self: flex-start;
+  position: relative;
+  left: 13%;
+}
+
+h6.LoginMessage {
+  margin: 5px;
+}
+
+.Login .Title {
+  position: relative;
+  margin: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.actionButtons {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.search-panel {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  place-content: center;
+  justify-content: flex-start;
+}
+
+.search-results img {
+  max-width: 75px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.search-result-image.checked {
+      /* opacity: .7; */
+      border: #f900ff;
+      border-width: 3px;
+      border-style: solid;
+}
+
+input#ImageURL {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.Container.blur {
+  filter:blur(6px);
 }

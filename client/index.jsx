@@ -1,6 +1,6 @@
 import React from 'react';
-import App from './components/App.jsx';
+import Login from './components/Login.jsx';
 import { createRoot } from 'react-dom/client';
 const app = document.getElementById('app');
 const root = createRoot(app);
-root.render(<App tab="home"/>);
+root.render(<Login tab="home"/>);

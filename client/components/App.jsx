@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import AddModal from './AddModal.jsx';
 import axios from 'axios';
-function App () {
+function App ({loggedIn, setUsername, setPassword, setLoginMessage, userID}) {
   const [data, setData] = useState(undefined);
   const [fullScreenTrue, setFullscreen] = useState(false);
   const [Update, setUpdatedState] = useState({});
   const [Type, setViewType] = useState('Home');
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    axios.get('/Sites')
+    axios.get(`/Sites/${userID}`)
     .then(({data}) => setData(data))
   }, [fullScreenTrue, Update]);
-  const [modalVisible, setModalVisible] = useState(false);
+
   const ItemStyle = {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -56,16 +57,19 @@ function App () {
         <input type="checkbox" id="fullScreen" name="fullScreen" value="FullScreen" onChange={(e) => setFullscreen(e.target.checked)}/> <label htmlFor="fullScreen">{'Fullscreen (Youtube Bug)'}</label>
       </li>
       <li onClick={() => setViewType('Home')}>Home</li>
-      <li onClick={()=> setViewType('Gaming')}>Gaming</li>
-      <li onClick={()=> setViewType('Streaming')}>Streaming</li>
-      <li onClick={()=> setViewType('Browsing')}>Browsing</li>
+      <li onClick={() => setViewType('Gaming')}>Gaming</li>
+      <li onClick={() => setViewType('Streaming')}>Streaming</li>
+      <li onClick={() => setViewType('Browsing')}>Browsing</li>
+      <li onClick={() => (localStorage.clear(), setUsername(''), setPassword(''), setLoginMessage('Please enter your username and password.'), loggedIn(false))}style={{fontSize: '10px'}}>Logout</li>
     </ul>
     </div>
-    <div className="Container">
-      {modalVisible && <AddModal func={setModalVisible} update={setUpdatedState}></AddModal>}
+    <div className={!modalVisible ? 'Container' : 'Container blur'}>
       <div className="Items" style={ItemStyle}>
-      <div className="Add Item" onClick={() => setModalVisible(true)}>
-      </div>
+      <a id="AddItem" className="Add Item">
+        <figure>
+          <img onClick={() => setModalVisible(true)}src="https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&amp;m=688550958&amp;s=612x612&amp;w=0&amp;h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0="/>
+        </figure>
+      </a>
 
       {data && data.map(data => {
         let goodToGo = false;
@@ -169,10 +173,8 @@ function App () {
 
 
       </div>
-
-
-
     </div>
+    {modalVisible && <AddModal func={setModalVisible} update={setUpdatedState}></AddModal>}
   </>
   )
 }
