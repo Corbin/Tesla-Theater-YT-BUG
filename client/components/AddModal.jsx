@@ -68,7 +68,7 @@ function AddModal ({func, update}) {
         tbm: 'isch',
         ijn: 0,
         num: 100,
-        api_key: process.env.API_KEY
+        //api_key: process.env.API_KEY
       }
 
     }
