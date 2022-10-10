@@ -37,7 +37,7 @@ div {
 
 a {
   display: inline-block;
-  width: calc(50% - 4px);
+  width: calc(50% - 10vw);
   margin-right: 8px;
   text-decoration: none;
   color: black;
