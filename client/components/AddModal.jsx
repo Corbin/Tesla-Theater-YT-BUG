@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import SerpApi from 'google-search-results-nodejs';
-function AddModal ({func, update}) {
+function AddModal ({func, update, user}) {
   const [name, setName] = useState('');
   const [url, setURL] = useState('');
   const [imageurl, setImageURL] = useState('');
   const [category, setCategory] = useState('Streaming');
   const [images, setImages] = useState({});
   const [imageSearchEnabled, setSearchActive] = useState(true);
+  const [userID, setUserID] = useState(user);
 
   const style = {
     position: 'fixed',
@@ -56,7 +57,7 @@ function AddModal ({func, update}) {
   }
 
   const executeImgSearch = (query) => {
-    console.log(process.env.CORS_PROXY_ADDR)
+    //console.log(process.env.CORS_PROXY_ADDR)
     //CORS Bypass
     const config = {
       headers: {
@@ -118,7 +119,7 @@ function AddModal ({func, update}) {
       <label htmlFor="Browsing">Browsing</label>
 </fieldset>
     <div className="buttons">
-    <button style={buttonStyle} onClick={() => (axios.post('/Sites', {name, url, imageurl, category}), update({name, url, imageurl, category}))}>Add</button>
+    <button style={buttonStyle} onClick={() => (axios.post(`/Sites/${userID}`, {name, url, imageurl, category}), update({name, url, imageurl, category}))}>Add</button>
     <button style={buttonStyle} onClick={()=> func(false)}>Close</button>
     </div>
       </div>
