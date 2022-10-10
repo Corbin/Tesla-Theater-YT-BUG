@@ -36,19 +36,12 @@ div {
 }
 
 a {
-  /* display: inline-block;
-  margin-bottom: 8px;
-  width: calc(50% - 4px);
-  margin-right: 8px;
-  text-decoration: none;
-  color: black; */
-
   display: inline-block;
-  /* margin-bottom: 8px; */
   width: calc(50% - 4px);
   margin-right: 8px;
   text-decoration: none;
   color: black;
+  margin: 5px;
 }
 
 a:nth-of-type(2n) {
@@ -69,22 +62,17 @@ a:nth-of-type(2n) {
   }
 }
 
-figure {
-  margin: 0;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
 img {
-  border: none;
-  max-width: 100%;
-  height: auto;
-  width: 20vw;
-  display: block;
-  background: #000;
-  transition: transform .2s ease-in-out;
-  margin-left: auto;
-  margin-right: auto;
+    border: none;
+    max-width: 100%;
+    height: auto;
+    max-height: 10vh !important;
+    display: block;
+    max-width: 20vw !important;
+    width: auto;
+    background: #000;
+    transition: transform .2s ease-in-out;
+    margin: 7% auto;
 }
 
 fieldset {
@@ -111,37 +99,9 @@ li {
 }
 
 .Add.Item img{
-    /* margin: auto;
-    cursor: pointer;
-    height: 6vw;
-    width: 6vw;
-    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
-    background-size: contain; */
-
-    /* margin: auto;
-    cursor: pointer;
-    min-height: 4vw;
-    min-width: 4vw;
-    max-width: 6em;
-    max-height: 6em;
-    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
-    background-size: cover; */
-
-    /* margin: 1vh auto;
-    cursor: pointer;
-    min-height: 3vw;
-    min-width: 3vw;
-    max-width: 6em;
-    max-height: 6em;
-    background-image: url("https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&m=688550958&s=612x612&w=0&h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0=");
-    background-size: cover; */
-
     width: auto;
     height: 3.5vh;
-    /* max-width: 64px; */
-    /* max-width: 260px; */
     cursor: pointer;
-    /* max-height: 160px; */
 }
 
 .Login {
