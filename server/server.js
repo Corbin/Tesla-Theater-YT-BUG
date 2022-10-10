@@ -21,8 +21,8 @@ app.get('/Sites/:user_id', (req, res) => {
   .catch(error => (console.log(error), res.status(500).json(error)));
 })
 
-app.post('/Sites', (req, res) => {
-  db.AddOrUpdateSite(req.body)
+app.post('/Sites/:user_id', (req, res) => {
+  db.AddOrUpdateSite(req.params.user_id, req.body)
   .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0])))
   .catch(error => (console.log(error), res.status(500).json(error)));
 
