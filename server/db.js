@@ -18,17 +18,18 @@ const attemptRegistration = (registrationData) => pool.query(`
 INSERT INTO USERS (username, password, lastLogin) VALUES ($1, $2, current_timestamp) RETURNING *`, [registrationData.username, registrationData.password]);
 
 
-const AddOrUpdateSite = (data) => {
+const AddOrUpdateSite = (userID, data) => {
   const name = data.name;
   const url = data.url;
   const imageURL = data.imageurl;
   const category = data.category;
-  return pool.query(`INSERT INTO items( name, url, imageurl, category) VALUES ($1, $2, $3, $4)
+
+  return pool.query(`INSERT INTO items_users( user_id, name, url, imageurl, category) VALUES ($1, $2, $3, $4, $5)
   ON CONFLICT (name)
   DO
-  UPDATE SET url=$2, imageurl=$3, category=$4
+  UPDATE SET url=$3, imageurl=$4, category=$5
   RETURNING *
-  `, [name, url, imageURL, category]);
+  `, [userID, name, url, imageURL, category]);
 }
 
 
