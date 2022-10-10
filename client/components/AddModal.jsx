@@ -41,6 +41,14 @@ function AddModal ({func, update, user}) {
     marginLeft: '10px'
   }
 
+  const checkInputs = () => {
+    if (!name.length || !url.length || !imageurl.includes('http') || !category.length) {
+      return alert('Please check if all fields are filled out and try again!');
+    }
+    axios.post(`/Sites/${userID}`, {name, url, imageurl, category});
+    update({name, url, imageurl, category});
+  }
+
   const urlCheck = (input) => {
     let url = input;
     if (!url.includes('http://')) {
@@ -53,7 +61,7 @@ function AddModal ({func, update, user}) {
         url = 'http://www.' + input.split('http://')[1];
       }
     }
-    setImageURL(url);
+    setURL(url);
   }
 
   const executeImgSearch = (query) => {
@@ -84,7 +92,7 @@ function AddModal ({func, update, user}) {
       <label>Name</label>
       <input name="Name" id="Name" placeholder="Enter the name of the service" required type="text" onChange={(e) => setName(e.target.value)} style={inputStyle}/>
       <label>URL</label>
-      <input name="URL" id="URL" placeholder="E.g. www.hulu.com, http://hulu.com, hulu.com" required type="text" onChange={(e) => setURL(e.target.value)} style={inputStyle}/>
+      <input name="URL" id="URL" placeholder="E.g. www.hulu.com, http://hulu.com, hulu.com" required type="text" onChange={(e) => urlCheck(e.target.value)} style={inputStyle}/>
       <label>{imageSearchEnabled ? 'Thumbnail Search Query' : 'ImageURL'}</label>
       {imageSearchEnabled ?
         <>
@@ -100,7 +108,7 @@ function AddModal ({func, update, user}) {
                 }}key={image.position} src={image.original}/>)}
           </div>
         </>
-      : <input name="ImageURL" id="ImageURL" placeholder="Enter image's url, e.g. https://i.imgur.com/image.png" required type="text" style={inputStyle} onChange={(e) => urlCheck(e.target.value)}/>
+      : <input name="ImageURL" id="ImageURL" placeholder="Enter image's url, e.g. https://i.imgur.com/image.png" required type="text" style={inputStyle} onChange={(e) => setImageURL(e.target.value)}/>
       }
 <p style={{
     fontSize: '13px',
@@ -119,7 +127,7 @@ function AddModal ({func, update, user}) {
       <label htmlFor="Browsing">Browsing</label>
 </fieldset>
     <div className="buttons">
-    <button style={buttonStyle} onClick={() => (axios.post(`/Sites/${userID}`, {name, url, imageurl, category}), update({name, url, imageurl, category}))}>Add</button>
+    <button style={buttonStyle} onClick={() => checkInputs()}>Add</button>
     <button style={buttonStyle} onClick={()=> func(false)}>Close</button>
     </div>
       </div>
