@@ -16,11 +16,10 @@ function App ({loggedIn, setUsername, setPassword, setLoginMessage, userID}) {
   const ItemStyle = {
     display: 'flex',
     flexFlow: 'row wrap',
-    placeContent: 'center flex-start',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
+    placeContent: 'center space-evenly',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
   }
 
   const ModalStyle = {
@@ -66,9 +65,9 @@ function App ({loggedIn, setUsername, setPassword, setLoginMessage, userID}) {
     <div className={!modalVisible ? 'Container' : 'Container blur'}>
       <div className="Items" style={ItemStyle}>
       <a id="AddItem" className="Add Item">
-        <figure>
+        {/* <figure> */}
           <img onClick={() => setModalVisible(true)}src="https://media.istockphoto.com/vectors/black-plus-sign-positive-symbol-vector-id688550958?k=20&amp;m=688550958&amp;s=612x612&amp;w=0&amp;h=wvzUqT3u3feYygOXg3GB9pYBbqIsyu_xpvfTX-6HOd0="/>
-        </figure>
+        {/* </figure> */}
       </a>
 
       {data && data.map(data => {
@@ -98,9 +97,9 @@ function App ({loggedIn, setUsername, setPassword, setLoginMessage, userID}) {
         }
       if(goodToGo){
         return <a key={data.name} href={fullScreenTrue ? "https://www.youtube.com/redirect?q=" + data.url : data.url} id={data.name}>
-      <figure>
-        <img style={ImgStyle} src={data.imageurl}></img>
-      </figure>
+      {/* <figure> */}
+        <img width="100%" style={ImgStyle} src={data.imageurl}></img>
+      {/* </figure> */}
     </a>
       }
       })}
@@ -174,7 +173,7 @@ function App ({loggedIn, setUsername, setPassword, setLoginMessage, userID}) {
 
       </div>
     </div>
-    {modalVisible && <AddModal func={setModalVisible} update={setUpdatedState}></AddModal>}
+    {modalVisible && <AddModal func={setModalVisible} update={setUpdatedState} user={userID} ></AddModal>}
   </>
   )
 }
