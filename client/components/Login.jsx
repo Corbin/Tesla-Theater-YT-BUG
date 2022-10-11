@@ -30,7 +30,7 @@ function Login() {
       .catch(err => console.log(err))
     :
       axios.post('/Users', {username, password})
-      .then(({data}) => data.registrationSuccessful && (setSuccessStatus(true), setLoginMessage('Registration Successful!')))
+      .then(({data}) => data.registrationSuccessful && (setLoginMessage('Registration Successful!'), setUserID(data.id)))
       .catch(err => (setSuccessStatus(false), setLoginMessage('Username already taken.')))
   }
 
@@ -38,7 +38,7 @@ function Login() {
     !successStatus ?
     <div className="Login">
       <form onSubmit={(e) => {e.preventDefault(); handleClicks(e.nativeEvent.submitter)}}>
-      <h5 className="Title">Login</h5>
+      <h5 className="Title">Authentication</h5>
       <h6 className="LoginMessage">{loginMessage}</h6>
       <label htmlFor="Username">Username:</label>
       <input id="Username" name="Username" type="text" default="" minLength="2" maxLength="24" onChange={(e) => setUsername(e.target.value)}/>
