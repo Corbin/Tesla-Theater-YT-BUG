@@ -23,7 +23,7 @@ app.get('/Sites/:user_id', (req, res) => {
 
 app.post('/Sites/:user_id', (req, res) => {
   db.AddOrUpdateSite(req.params.user_id, req.body)
-  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json(rows[0])))
+  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(201).json(rows[0])))
   .catch(error => (console.log(error), res.status(500).json(error)));
 
 })
@@ -37,7 +37,7 @@ app.get('/Users', (req, res) => {
 
 app.post('/Users', (req, res) => {
   db.attemptRegistration(req.body)
-  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(200).json({
+  .then(({rows}) => (res.set("Content-Security-Policy", "connect-src 'self'"), res.status(201).json({
     registrationSuccessful: true,
     id:rows[0]['id'],
     username:rows[0]['username']

@@ -23,13 +23,7 @@ const AddOrUpdateSite = (userID, data) => {
   const url = data.url;
   const imageURL = data.imageurl;
   const category = data.category;
-
-  return pool.query(`INSERT INTO items_users( user_id, name, url, imageurl, category) VALUES ($1, $2, $3, $4, $5)
-  ON CONFLICT (name)
-  DO
-  UPDATE SET url=$3, imageurl=$4, category=$5
-  RETURNING *
-  `, [userID, name, url, imageURL, category]);
+  return pool.query(`SELECT addOrUpdateApplet($1, $2, $3, $4, $5)`, [userID, name, url, imageURL, category]);
 }
 
 
